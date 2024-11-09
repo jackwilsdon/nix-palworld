@@ -15,14 +15,14 @@ let
 in
 stdenv.mkDerivation {
   name = "palworld-server-unwrapped";
-  version = "2024-09-01";
+  version = "2024-10-30";
 
   src = fetchSteam {
     name = "palworld-server";
     appId = "2394010";
     depotId = "2394012";
-    manifestId = "7493245879597781625";
-    hash = "sha256-NjDdOBfqF4H60u0Y4m/MlplSDDewsdxf6Uj4wPvTntg=";
+    manifestId = "752220234171168889";
+    hash = "sha256-dvk1CjESAIQhBlVcbIUA8PYAj6SGvZa8Nqc+obZuDXs=";
   };
 
   installPhase = ''
