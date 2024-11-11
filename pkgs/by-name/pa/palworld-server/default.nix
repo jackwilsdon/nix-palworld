@@ -1,19 +1,19 @@
 {
   buildFHSEnv,
-  callPackage,
+  libredirect,
   palworld-server-unwrapped,
   writeShellScript,
   ...
 }:
-let
-  preload = callPackage ./preload { };
-in
 buildFHSEnv {
   name = "palworld-server";
   inherit (palworld-server-unwrapped) version;
 
   runScript = writeShellScript "palworld-server.sh" ''
-    LD_PRELOAD=${preload} ${palworld-server-unwrapped}/Pal/Binaries/Linux/PalServer-Linux-Shipping "$@"
+    env \
+      LD_PRELOAD=${libredirect}/lib/libredirect.so \
+      NIX_REDIRECTS=${palworld-server-unwrapped}/Pal/Binaries/Linux/steam_appid.txt=/tmp/steam_appid.txt \
+      ${palworld-server-unwrapped}/Pal/Binaries/Linux/PalServer-Linux-Shipping "$@"
   '';
   meta.mainProgram = "palworld-server";
 }
